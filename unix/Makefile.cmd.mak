@@ -1,4 +1,14 @@
 #================================================
+# cmd
+cmd_chmod:
+	@chmod -R 777 $(GPROJECT_PATH) 
+#================================================
+# apache
+apa_status:
+	@sudo service apache2 status
+apa_restart:
+	@sudo service apache2 restart
+#================================================
 # git
 git_install:
 	@sudo apt install -y git
