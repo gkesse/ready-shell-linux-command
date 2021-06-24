@@ -36,6 +36,7 @@ echo sprintf("<html lang='fr'>\n");
 echo sprintf("<head>\n");
 echo sprintf("<title>ReadyApp</title>\n");
 echo sprintf("<link rel='stylesheet' href='style.css'>\n");
+echo sprintf("<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0'>\n");
 echo sprintf("</head>\n");
 echo sprintf("<body>\n");
 
