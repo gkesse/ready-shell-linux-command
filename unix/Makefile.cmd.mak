@@ -1,13 +1,15 @@
 #================================================
 # cmd
 cmd_chmod:
-	@chmod -R 777 $(GPROJECT_PATH) 
+	@sudo chmod -R 777 $(GPROJECT_PATH) 
 #================================================
 # apache
 apa_status:
 	@sudo service apache2 status
 apa_restart:
 	@sudo service apache2 restart
+apa_rewrite:
+	@sudo a2enmod rewrite
 #================================================
 # git
 git_install:
@@ -25,6 +27,8 @@ git_push:
 	@cd $(GPROJECT_PATH) && git pull && git add --all && git commit -m "Initial Commit" && git push -u origin main
 git_push_o:
 	@cd $(GPROJECT_PATH) && git add --all && git commit -m "Initial Commit" && git push -u origin main
+git_pull:
+	@cd $(GPROJECT_PATH) && git pull
 git_clone:
 	@cd $(GPROJECT_ROOT) && git clone $(GGIT_URL) $(GGIT_NAME) 
 #================================================
