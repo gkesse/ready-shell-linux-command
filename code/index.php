@@ -5,6 +5,7 @@ require "autoload.php";
 GManager::Instance()->startSession();
 GManager::Instance()->postRedirectGet();
 GManager::Instance()->getPageId();
+GManager::Instance()->getImageMap();
 //===============================================
 $lApp = GManager::Instance()->getData()->app;
 //===============================================

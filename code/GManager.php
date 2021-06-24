@@ -12,6 +12,7 @@ class GManager {
         $this->mgr->app->debug_file = "debug.txt";
         $this->mgr->app->tmp_dir = "tmp";
         $this->mgr->app->tmp_upload_file = "tmp/tmp_upload_file.tmp";
+        $this->mgr->app->upload_dir = "uploads";
     }
     //===============================================
     public static function Instance() {
@@ -87,6 +88,18 @@ class GManager {
         }
     }
     //===============================================
+    public function getImageMap() {
+        $lApp = $this->mgr->app;
+        $lPattern = "./" . $lApp->upload_dir . "/*";
+        $lImgMap = array();
+        foreach(glob($lPattern) as $lFile) {
+            $lFilename = basename($lFile);
+            $lUrl = "/" . $lApp->upload_dir . "/" . $lFilename;
+            array_push($lImgMap, array($lUrl, $lFilename));
+        }
+        return $lImgMap;
+    }
+    //===============================================
 }
 //===============================================
 class sGManager {
@@ -103,6 +116,8 @@ class sGApp {
     public $tmp_upload_file;
     // page
     public $page_id;
+    // upload
+    public $upload_dir;
 }
 //===============================================
 ?>

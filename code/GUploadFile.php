@@ -8,8 +8,8 @@ class GUploadFile extends GWidget {
     //===============================================
     public function run() {
         //===============================================
+        $lApp = GManager::Instance()->getData()->app;
         $lUploadFlag = false;
-        $lUploadDir = "uploads";
         $lUploadFilename = "";
         $lUploadFile = "";
         $lUploadFileExt = "";
@@ -25,7 +25,7 @@ class GUploadFile extends GWidget {
         if(!empty($_POST)) {
             $lUploadFlag = true;
             $lUploadFilename = basename($_FILES["upload_file"]["name"]);
-            $lUploadFile = $lUploadDir . "/" . $lUploadFilename;
+            $lUploadFile = $lApp->upload_dir . "/" . $lUploadFilename;
             $lUploadFileExt = strtolower(pathinfo($lUploadFile, PATHINFO_EXTENSION));
             $lUploadFileExist = file_exists($lUploadFile);
             $lUploadFileSize = $_FILES["upload_file"]["size"];
@@ -55,7 +55,7 @@ class GUploadFile extends GWidget {
             echo sprintf("</div></div>\n");
 
             if($lUploadValid) {
-                GManager::Instance()->createDir($lUploadDir);
+                GManager::Instance()->createDir($lApp->upload_dir);
                 
                 $lMoveFlag = GManager::Instance()->moveUploadFile($lUploadFile);
                 
