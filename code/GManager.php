@@ -21,6 +21,10 @@ class GManager {
         return self::$instance;
     }
     //===============================================
+    public function getData() {
+        return $this->mgr;
+    }
+    //===============================================
     public function startSession() {
         session_start();
     }
@@ -75,6 +79,14 @@ class GManager {
         fclose($lFile);
     }
     //===============================================
+    public function getPageId() {
+        $lApp = $this->mgr->app;
+        $lApp->page_id = "home";
+        if(!empty($_GET)) {
+            $lApp->page_id = $_GET["page_id"];
+        }
+    }
+    //===============================================
 }
 //===============================================
 class sGManager {
@@ -89,6 +101,8 @@ class sGApp {
     // tmp
     public $tmp_dir;
     public $tmp_upload_file;
+    // page
+    public $page_id;
 }
 //===============================================
 ?>
