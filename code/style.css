@@ -6,6 +6,19 @@
     margin-bottom: 20px;
 }
 /*===============================================*/
+.border2 {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 5px;
+}
+/*===============================================*/
+.border3 {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+}
+/*===============================================*/
 .header {
     display: inline-block;
     border: 1px solid black;
