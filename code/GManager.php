@@ -115,8 +115,10 @@ class GManager {
         foreach(glob($lPattern) as $lFile) {
             $lFilename = basename($lFile);
             $lUrl = "/" . $lApp->upload_dir . "/" . $lFilename;
-            array_push($lImgMap, array($lUrl, $lFilename));
+            $lDate = filemtime("." . $lUrl);
+            array_push($lImgMap, array($lUrl, $lFilename, $lDate));
         }
+        usort($lImgMap, array("GManager", "sortByTime"));
         return $lImgMap;
     }
     //===============================================
@@ -174,6 +176,12 @@ class GManager {
                 unlink("." . $lImgFile);
             }
         }
+    }
+    //===============================================
+    public static function sortByTime($data1, $data2) {
+        $lDate1 = $data1[2];
+        $lDate2 = $data2[2];
+        return $lDate1 - $lDate2;
     }
     //===============================================
 }
