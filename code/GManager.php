@@ -131,7 +131,6 @@ class GManager {
         $lFilename = $lPathInfo['filename'];
         $lExtension = $lPathInfo['extension'];
         $lFile = sprintf("%s/%s_%d.%s", $lDirname , $lFilename , $index , $lExtension);
-        $this->write($lFile);
         return $lFile;
     }
     //===============================================
