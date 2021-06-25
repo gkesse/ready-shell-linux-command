@@ -152,6 +152,14 @@ class GManager {
         return $lChecked;
     }
     //===============================================
+    public function getSelectedCount($name) {
+        $lCount = 0;
+        if(isset($_POST[$name])) {
+            $lCount = count($_POST[$name]);
+        }
+        return $lCount;
+    }
+    //===============================================
 }
 //===============================================
 class sGManager {
