@@ -6,7 +6,7 @@ class GDisplayFilesHeaderSelect extends GWidget {
     //===============================================
     public function __construct() {
         $this->m_header = array(
-            array("", "Supprimer"),
+            array("select", "Supprimer"),
             array("", "Annuler"),
         );
     }
@@ -17,8 +17,20 @@ class GDisplayFilesHeaderSelect extends GWidget {
             $lHeader = $this->m_header[$i];
             $lAction = $lHeader[1];
             if($lAction == "Supprimer") {
-                $lCount = GManager::Instance()->getSelectedCount("imgs");
-                if($lCount == 0) {continue;}
+                $lCount = GManager::Instance()->getSelectCount("imgs");
+                if($lCount > 0) {
+                    echo sprintf("<form class='form' action='' method='post'>\n");
+                    echo sprintf("<input type='hidden' name='action' value='delete'>\n");
+                    for($k = 0; $k < $lCount; $k++) {
+                        $lImgFile = GManager::Instance()->getSelectImage("imgs", $k);
+                        echo sprintf("<input type='hidden' name='imgs_delete[]' value='%s'>\n", $lImgFile);
+                    }
+                    echo sprintf("<button  type='submit' name='req' value='%s'>
+                    %s</button>\n", $lHeader[0], $lHeader[1]);
+                    echo sprintf("</form>\n");
+                    $j = 1;
+                }
+                continue;
             }
             if($j != 0) {echo sprintf(" | \n");}
             $j = 1;
