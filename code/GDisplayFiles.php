@@ -2,11 +2,9 @@
 //===============================================
 class GDisplayFiles extends GWidget {
     //===============================================
-    private $m_imgMap;
     private $m_headerMap;
     //===============================================
     public function __construct() {
-        $this->m_imgMap = GManager::Instance()->getImageMap();
         $this->m_headerMap = GWidget::Create("stackwidget");
         $this->m_headerMap->addPage("", "displayfilesheader");
         $this->m_headerMap->addPage("select", "displayfilesheaderselect");
@@ -16,12 +14,19 @@ class GDisplayFiles extends GWidget {
         echo sprintf("<h1>Galerie photo</h1>\n");
         
         $lReq = GManager::Instance()->getAction("req");
+        $lAction = GManager::Instance()->getAction("action");
         $this->m_headerMap->run2($lReq);
                 
+        if($lAction == "delete") {
+            GManager::Instance()->deleteSelectImages("imgs_delete");
+        }
+        
+        $lImgMap = GManager::Instance()->getImageMap();
+
         if($lReq == "") {
             echo sprintf("<div><div class='border2'>\n");
-            for($i = 0; $i < count($this->m_imgMap); $i++) {
-                $lImg = $this->m_imgMap[$i];
+            for($i = 0; $i < count($lImgMap); $i++) {
+                $lImg = $lImgMap[$i];
                 echo sprintf("<div class='border3'>
                 <img class='img' src='%s' alt='%s' title='%s'/></div>\n",
                 $lImg[0], $lImg[1], $lImg[1]);
@@ -31,8 +36,8 @@ class GDisplayFiles extends GWidget {
         else if($lReq == "select") {
             echo sprintf("<form action='' method='post'><div class='border2'>\n");
             echo sprintf("<input type='hidden' name='req' value='select'>\n"); 
-            for($i = 0; $i < count($this->m_imgMap); $i++) {
-                $lImg = $this->m_imgMap[$i];
+            for($i = 0; $i < count($lImgMap); $i++) {
+                $lImg = $lImgMap[$i];
                 echo sprintf("<div class='border3'>
                 <img class='img' src='%s' alt='%s' title='%s'/>\n",
                 $lImg[0], $lImg[1], $lImg[1]);

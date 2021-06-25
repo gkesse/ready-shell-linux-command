@@ -152,12 +152,28 @@ class GManager {
         return $lChecked;
     }
     //===============================================
-    public function getSelectedCount($name) {
+    public function getSelectCount($name) {
         $lCount = 0;
         if(isset($_POST[$name])) {
             $lCount = count($_POST[$name]);
         }
         return $lCount;
+    }
+    //===============================================
+    public function getSelectImage($name, $index) {
+        $lImgFile = "";
+        if(isset($_POST[$name])) {
+            $lImgFile = $_POST[$name][$index];
+        }
+        return $lImgFile;
+    }
+    //===============================================
+    public function deleteSelectImages($name) {
+        if(isset($_POST[$name])) {
+            foreach($_POST[$name] as $lImgFile) {
+                unlink("." . $lImgFile);
+            }
+        }
     }
     //===============================================
 }
