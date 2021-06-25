@@ -37,10 +37,10 @@ class GDisplayFiles extends GWidget {
                 <img class='img' src='%s' alt='%s' title='%s'/>\n",
                 $lImg[0], $lImg[1], $lImg[1]);
                 $lChecked = GManager::Instance()->getChecked("imgs", $lImg[0]);
-                echo sprintf("<input type='checkbox' name='imgs[]' value='%s' %s>\n", $lImg[0], $lChecked);
+                echo sprintf("<input type='checkbox' name='imgs[]' 
+                value='%s' onchange='onEvent(this, \"displayfiles\", \"select\")' %s>\n", $lImg[0], $lChecked);
                 echo sprintf("</div>\n");
             }
-            echo sprintf("<input type='submit'>\n");
             echo sprintf("</div></form>\n");
         }
     }

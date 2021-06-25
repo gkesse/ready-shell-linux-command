@@ -21,6 +21,8 @@ echo sprintf("<body>\n");
 GWidget::Create("header")->run();
 GWidget::Create("workspace")->run();
 
+echo sprintf("<script src='/GManager.js' async></script>\n");
+echo sprintf("<script src='/script.js' async></script>\n");
 echo sprintf("</body>\n");
 echo sprintf("</html>\n");
 //===============================================
