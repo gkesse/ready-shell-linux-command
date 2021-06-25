@@ -23,7 +23,7 @@ class GUploadFiles extends GWidget {
         $lUploadFileExtValid = true;
         $lUploadValid = true;
         //===============================================
-        $lUploadFileSizeMax = 2*1024*1024;
+        $lUploadFileSizeMax = 20*1000*1000;
         $lUploadFileExtMap = array("png", "bmp", "jpg", "jpeg", "gif");
         //===============================================
         if(!empty($_POST)) {
