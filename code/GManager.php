@@ -36,11 +36,7 @@ class GManager {
             $_SESSION["save_post"] = $_POST ;
             $_SESSION["save_files"] = $_FILES ;
             
-            $lUrl = $_SERVER["PHP_SELF"] ;
-            
-            if(!empty($_SERVER["QUERY_STRING"])) {
-                $lUrl .= "?" . $_SERVER["QUERY_STRING"] ;
-            }
+            $lUrl = $_SERVER['REQUEST_URI'] ;
             
             if(!empty($_FILES)) {
                 $this->createDir($lApp->tmp_dir);
@@ -141,6 +137,19 @@ class GManager {
             $lHtml .= sprintf("<div>lUploadFilename[%d] : %s</div>\n", $i, $lFilename);
         }
         return $lHtml;
+    }
+    //===============================================
+    public function getAction($name) {
+        $lAction = isset($_POST[$name]) ? $_POST[$name] : "";        
+        return $lAction;
+    }
+    //===============================================
+    public function getChecked($name, $value) {
+        $lChecked = "";
+        if(isset($_POST[$name])) {
+            $lChecked = in_array($value, $_POST[$name]) ? "checked" : "";
+        }
+        return $lChecked;
     }
     //===============================================
 }

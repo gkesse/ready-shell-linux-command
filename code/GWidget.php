@@ -15,6 +15,8 @@ class GWidget {
         if($key == "uploadfile") {return new GUploadFile();}
         if($key == "uploadfiles") {return new GUploadFiles();}
         if($key == "displayfiles") {return new GDisplayFiles();}
+        if($key == "displayfilesheader") {return new GDisplayFilesHeader();}
+        if($key == "displayfilesheaderselect") {return new GDisplayFilesHeaderSelect();}
         return new GError();
     }
     //===============================================
