@@ -9,7 +9,7 @@ class GDisplayFiles extends GWidget {
     }
     //===============================================
     public function run() {
-        echo sprintf("<h1>GDisplayFiles</h1>\n");
+        echo sprintf("<h1>Galerie photo</h1>\n");
         echo sprintf("<div><div class='border2'>\n");
         for($i = 0; $i < count($this->m_imgMap); $i++) {
             $lImg = $this->m_imgMap[$i];

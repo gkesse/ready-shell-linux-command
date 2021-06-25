@@ -44,8 +44,20 @@ class GManager {
             
             if(!empty($_FILES)) {
                 $this->createDir($lApp->tmp_dir);
-                foreach($_FILES as $lKey => $lValue) {
-                    move_uploaded_file($_FILES[$lKey]["tmp_name"], $lApp->tmp_upload_file);
+                $lUploadType = $_POST["upload_type"];
+                if($lUploadType == "oneonly") {
+                    foreach($_FILES as $lKey => $lValue) {
+                        move_uploaded_file($_FILES[$lKey]["tmp_name"], $lApp->tmp_upload_file);
+                    }
+                }
+                else if($lUploadType == "multiple") {
+                    foreach($_FILES as $lKey => $lValue) {
+                        for($i = 0; $i < count($_FILES[$lKey]["tmp_name"]); $i++) {
+                            $lTmpFile = $_FILES[$lKey]["tmp_name"][$i];
+                            $lTmpFileCopy = GManager::Instance()->getTmpFile($i);
+                            move_uploaded_file($_FILES[$lKey]["tmp_name"][$i], $lTmpFileCopy);
+                        }
+                    }
                 }
             }
             
@@ -70,6 +82,18 @@ class GManager {
         $lApp = $this->mgr->app;
         $lCopyFlag = copy($lApp->tmp_upload_file, $file);
         unlink($lApp->tmp_upload_file);
+        return $lCopyFlag;
+    }
+    //===============================================
+    public function moveUploadFiles($files) {
+        $lApp = $this->mgr->app;
+        $lCopyFlag = true;
+        for($i = 0; $i < count($files); $i++) {
+            $lFile = $files[$i];
+            $lTmpFile = $this->getTmpFile($i);
+            $lCopyFlag &= copy($lTmpFile, $lFile);
+            unlink($lTmpFile);
+        }
         return $lCopyFlag;
     }
     //===============================================
@@ -98,6 +122,26 @@ class GManager {
             array_push($lImgMap, array($lUrl, $lFilename));
         }
         return $lImgMap;
+    }
+    //===============================================
+    public function getTmpFile($index) {
+        $lApp = $this->mgr->app;
+        $lPathInfo = pathinfo($lApp->tmp_upload_file);
+        $lDirname = $lPathInfo['dirname'];
+        $lFilename = $lPathInfo['filename'];
+        $lExtension = $lPathInfo['extension'];
+        $lFile = sprintf("%s/%s_%d.%s", $lDirname , $lFilename , $index , $lExtension);
+        $this->write($lFile);
+        return $lFile;
+    }
+    //===============================================
+    public function getUploadFilename() {
+        $lHtml = "";
+        for($i = 0; $i < count($_FILES["upload_files"]["name"]); $i++) {
+            $lFilename = basename($_FILES["upload_files"]["name"][$i]);
+            $lHtml .= sprintf("<div>lUploadFilename[%d] : %s</div>\n", $i, $lFilename);
+        }
+        return $lHtml;
     }
     //===============================================
 }

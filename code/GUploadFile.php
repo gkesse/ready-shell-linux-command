@@ -34,10 +34,11 @@ class GUploadFile extends GWidget {
             $lUploadValid = (!$lUploadFileExist && $lUploadFileSizeValid && $lUploadFileExtValid);
         }
         //===============================================
-        echo sprintf("<h1>Système d'hébergement de fichiers</h1>\n");
+        echo sprintf("<h1>Système d'hébergement de fichiers (unique)</h1>\n");
 
         echo sprintf("<div><div class='border'>\n");
         echo sprintf("<form action='' method='post' enctype='multipart/form-data'>\n");
+        echo sprintf("<input type='hidden' name='upload_type' value='oneonly'>\n"); 
         echo sprintf("<input type='file' name='upload_file' required>\n");
         echo sprintf("<input type='submit' value='Charger' name='upload'>\n");
         echo sprintf("</form>\n");
