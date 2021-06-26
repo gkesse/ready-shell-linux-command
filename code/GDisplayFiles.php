@@ -2,7 +2,7 @@
 //===============================================
 class GDisplayFiles extends GWidget {
     //===============================================
-    private $m_headerMap;
+     private $m_headerMap;
     //===============================================
     public function __construct() {
         $this->m_headerMap = GWidget::Create("stackwidget");
