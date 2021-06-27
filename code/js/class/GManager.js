@@ -12,8 +12,8 @@ class GManager {
         // app
         this.mgr.app = new sGApp();
         this.mgr.app.app_name = "ReadyApp";
-        this.mgr.app.win_width = 640;
-        this.mgr.app.win_height = 480;
+        this.mgr.app.displayfiles_check_count = 0;
+        this.mgr.app.displayfiles_check_flag = 0;
     }
     //===============================================
     static Instance() {
