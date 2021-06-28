@@ -29,12 +29,18 @@ function onEvent(obj, sender, action) {
                 lImgNode.parentNode.innerHTML = lImg.outerHTML;
             }
         }
+        // header_cancel
+        else if(action == "header_cancel") {
+            lApp.displayfiles_check_flag = 0;
+            lApp.displayfiles_check_count = 0;
+            onEvent(obj, "displayfiles", "header_js");
+        }
         // header_select
         else if(action == "header_select") {
             var lHeaders = [
-                ["delete", "Supprimer", "displayfiles", "header_js"],
+                ["delete", "Supprimer", "displayfiles", "image_delete"],
                 ["download", "Télécharger", "displayfiles", "header_js"],
-                ["cancel", "Annuler", "displayfiles", "header_js"],
+                ["cancel", "Annuler", "displayfiles", "header_cancel"],
             ];
             var lHtml = "";
             for(var i = 0, j = 0; i < lHeaders.length; i++) {
@@ -85,15 +91,22 @@ function onEvent(obj, sender, action) {
             obj = obj.parentNode.parentNode.parentNode.parentNode.previousElementSibling.firstChild.firstChild;
             onEvent(obj, "displayfiles", "header_select");
         }
-        else if(action == "select") {
-            var lForm = obj.parentNode.parentNode.parentNode;
-            lForm.submit();
-        }
-        else if(action == "delete") {
-            var lForm = obj.parentNode;
+        // image_delete
+        else if(action == "image_delete") {
             var lConfirm = confirm("Voulez-vous supprimer ?");
-            if(lConfirm) {
-                lForm.submit();
+            if(!lConfirm) {return;}
+            var lParent = obj.parentNode.parentNode.nextElementSibling;
+            var lInputMap = lParent.querySelectorAll("input");
+            for(var i = 0; i < lInputMap.length; i++) {
+                var lInputNode = lInputMap[i];
+                var lChecked = lInputNode.checked;
+                if(lChecked) {
+                    var lImg = lInputNode.parentNode.previousElementSibling;
+                    var lSrc = lImg.getAttribute("src");
+                    var lNode = lInputNode.parentNode.parentNode;
+                    lNode.parentNode.removeChild(lNode);
+                    GManager.Instance().removeImage(lSrc);
+                }
             }
         }
     }
