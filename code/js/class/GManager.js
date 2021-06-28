@@ -1,31 +1,47 @@
 //===============================================
-class sGManager {}
-class sGApp {}
+function sGManager() {}
+function sGApp() {}
 //===============================================
-class GManager {
+var GManager = (function() {
     //===============================================
-    static instance = null;
+    var m_instance;
     //===============================================
-    constructor() {
-        // manager
-        this.mgr = new sGManager();
-        // app
-        this.mgr.app = new sGApp();
-        this.mgr.app.app_name = "ReadyApp";
-        this.mgr.app.displayfiles_check_count = 0;
-        this.mgr.app.displayfiles_check_flag = 0;
+    var mgr;
+    //===============================================
+    var Container = function() {
+        return {
+            //===============================================
+            init: function() {
+                this.construct();
+            },
+            //===============================================
+            construct: function() {
+                // manager
+                this.mgr = new sGManager();
+                // app
+                this.mgr.app = new sGApp();
+                this.mgr.app.app_name = "ReadyApp";
+                this.mgr.app.displayfiles_check_count = 0;
+                this.mgr.app.displayfiles_check_flag = 0;
+            },
+            //===============================================
+            getData: function() {
+                return this.mgr;
+            }
+            //===============================================
+        };
     }
     //===============================================
-    static Instance() {
-        if(this.instance == null) {
-            this.instance = new GManager();
+    return {
+        Instance: function() {
+            if(!m_instance) {
+                m_instance = Container();
+            }
+            return m_instance;
         }
-        return this.instance;
-    }
+    };
     //===============================================
-    getData() {
-        return this.mgr;
-    }
-    //===============================================
-}
+})();
+//===============================================
+GManager.Instance().init();
 //===============================================

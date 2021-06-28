@@ -21,8 +21,8 @@ git_branch_create:
 	@cd $(GPROJECT_PATH) && git branch $(GGIT_BRANCH)
 git_branch_checkout:
 	@cd $(GPROJECT_PATH) && git checkout $(GGIT_BRANCH)
-git_branch_push:
-	@cd $(GPROJECT_PATH) && git pull && git add --all && git commit -m "Initial Commit" && git push -u origin $(GGIT_BRANCH)
 git_branch_checkout_m:
 	@cd $(GPROJECT_PATH) && git checkout main
+git_branch_push:
+	@cd $(GPROJECT_PATH) && git pull && git add --all && git commit -m "Initial Commit" && git push -u origin $(GGIT_BRANCH)
 #================================================
