@@ -10,7 +10,7 @@ git_push:
 git_push_o:
 	@cd $(GPROJECT_PATH) && git add --all && git commit -m "Initial Commit" && git push -u origin main
 git_push_all:
-	@cd $(GPROJECT_PATH) && git add --all && git commit -m "Initial Commit" && git push -u --all
+	@cd $(GPROJECT_PATH) && git pull --all && git add --all && git commit -m "Initial Commit" && git push -u --all
 git_pull:
 	@cd $(GPROJECT_PATH) && git pull
 git_clone:
