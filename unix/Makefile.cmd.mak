@@ -28,9 +28,13 @@ git_push:
 git_push_o:
 	@cd $(GPROJECT_PATH) && git add --all && git commit -m "Initial Commit" && git push -u origin main
 git_push_all:
+	@cd $(GPROJECT_PATH) && git pull --all && git add --all && git commit -m "Initial Commit" && git push -u --all
+git_push_all_o:
 	@cd $(GPROJECT_PATH) && git add --all && git commit -m "Initial Commit" && git push -u --all
 git_pull:
 	@cd $(GPROJECT_PATH) && git pull
+git_pull_all:
+	@cd $(GPROJECT_PATH) && git pull --all
 git_clone:
 	@cd $(GPROJECT_ROOT) && git clone $(GGIT_URL) $(GGIT_NAME) 
 git_branch_list:
