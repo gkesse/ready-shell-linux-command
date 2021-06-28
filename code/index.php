@@ -1,6 +1,6 @@
 <?php
 //===============================================
-require "./php/class/autoload.php";
+require $_SERVER["DOCUMENT_ROOT"]."/php/class/autoload.php";
 //===============================================
 GManager::Instance()->startSession();
 GManager::Instance()->postRedirectGet();

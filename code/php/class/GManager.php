@@ -95,7 +95,7 @@ class GManager {
     //===============================================
     public function write($data) {
         $lApp = $this->mgr->app;
-        $lFile = fopen($lApp->debug_file, "a+");
+        $lFile = fopen($_SERVER["DOCUMENT_ROOT"]."/".$lApp->debug_file, "a+");
         fwrite($lFile, $data . "\n");
         fclose($lFile);
     }

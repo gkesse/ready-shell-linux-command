@@ -27,6 +27,20 @@ var GManager = (function() {
             //===============================================
             getData: function() {
                 return this.mgr;
+            },
+            //===============================================
+            removeImage: function(path) {
+                var lXmlhttp = new XMLHttpRequest();
+                lXmlhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                    }
+                }
+                lXmlhttp.open("POST", "/php/request.php", true);
+                lXmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                lXmlhttp.send(
+                "req=" + "image_remove" +
+                "&path=" + path
+                );
             }
             //===============================================
         };
