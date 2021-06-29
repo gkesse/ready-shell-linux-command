@@ -1,4 +1,6 @@
 //===============================================
+// onEvent
+//===============================================
 function onEvent(obj, sender, action) {
     var lApp = GManager.Instance().getData().app;
     //===============================================
@@ -144,7 +146,29 @@ function onEvent(obj, sender, action) {
         //===============================================
     }
     //===============================================
+    // uploadfiles
+    else if(sender == "uploadfiles") {
+        //===============================================
+        // image_load
+        if(action == "image_load") {
+            var lParent = obj.parentNode.parentNode.parentNode.nextElementSibling;
+            var lHtml = "";
+            for(var i = 0; i < obj.files.length; i++) {
+                (function() {
+                    var lReader = new FileReader();
+                    lReader.onload = function(event) {
+                        lParent.innerHTML += format("<div class='border3'><img class='img' src='{0}'/></div>", event.target.result);
+                    }
+                    lReader.readAsDataURL(obj.files[i]);
+                })();
+            }
+        }
+        //===============================================
+    }
+    //===============================================
 }
+//===============================================
+// onLazyLoad
 //===============================================
 function onLazyLoad() {
     var lLazyLoad = document.querySelectorAll(".lazyload");
@@ -178,5 +202,35 @@ function onLazyLoad() {
     });
 }
 //===============================================
+// onJQuery
+//===============================================
+function onJQuery() {
+    $(function() {
+        // Multiple images preview in browser
+        var imagesPreview = function(input, placeToInsertImagePreview) {
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+        };
+
+        $('#gallery-photo-add').on('change', function() {
+            imagesPreview(this, 'div.gallery');
+        });
+    });    
+}
+//===============================================
 onLazyLoad();
+//onJQuery();
 //===============================================

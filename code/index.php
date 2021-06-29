@@ -21,9 +21,10 @@ echo sprintf("<body>\n");
 GWidget::Create("header")->run();
 GWidget::Create("workspace")->run();
 
-echo sprintf("<script src='/js/manager.js' async></script>\n");
-echo sprintf("<script src='/js/class/GManager.js' async></script>\n");
-echo sprintf("<script src='/js/script.js' async></script>\n");
+echo sprintf("<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>\n");
+echo sprintf("<script src='/js/manager.js'></script>\n");
+echo sprintf("<script src='/js/class/GManager.js'></script>\n");
+echo sprintf("<script src='/js/script.js'></script>\n");
 echo sprintf("</body>\n");
 echo sprintf("</html>\n");
 //===============================================
