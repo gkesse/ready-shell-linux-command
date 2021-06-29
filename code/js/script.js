@@ -17,6 +17,8 @@ function onEvent(obj, sender, action) {
                 lHtml += format("<button onclick='onEvent(this, \"{0}\", \"{1}\")'>{2}</button>", lHeader[2], lHeader[3], lHeader[1]);
             }
             obj.innerHTML = lHtml;
+            var lHtml = format("<div class='border'>({0}) fichier(s) sélectionné(s)</div>", lApp.displayfiles_check_count);
+            obj.nextElementSibling.innerHTML = "";
         }
         //===============================================
         // header_js
@@ -63,6 +65,9 @@ function onEvent(obj, sender, action) {
             }
             obj = obj.parentNode;
             obj.innerHTML = lHtml;
+
+            var lHtml = format("<div class='border'>({0}) fichier(s) sélectionné(s)</div>", lApp.displayfiles_check_count);
+            obj.nextElementSibling.innerHTML = lHtml;
             
             if(lApp.displayfiles_check_flag == 0) {
                 var lParent = obj.parentNode.nextElementSibling.firstChild;
