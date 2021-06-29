@@ -15,9 +15,3 @@ function format(fmt, ...args) {
     });
 }
 //===============================================
-function message(fmt, ...args) {
-    var lMsg = document.getElementById("msg");
-    var lHtml = format(fmt, ...args);
-    lMsg.innerHTML += lHtml;
-}
-//===============================================
