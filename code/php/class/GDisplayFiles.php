@@ -14,7 +14,8 @@ class GDisplayFiles extends GWidget {
         echo sprintf("<h1>Galerie photo</h1>\n");
                 
         echo sprintf("<div><div class='border lazyload' 
-        data-sender='displayfiles' data-action='header'></div></div>\n");
+        data-sender='displayfiles' data-action='header'></div>
+        <div></div></div>\n");
 
         $lImgMap = GManager::Instance()->getImageMap();
 
