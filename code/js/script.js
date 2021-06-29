@@ -1,8 +1,10 @@
 //===============================================
 function onEvent(obj, sender, action) {
     var lApp = GManager.Instance().getData().app;
+    //===============================================
     // displayfiles
     if(sender == "displayfiles") {
+        //===============================================
         // header
         if(action == "header") {
             var lHeaders = [
@@ -16,6 +18,7 @@ function onEvent(obj, sender, action) {
             }
             obj.innerHTML = lHtml;
         }
+        //===============================================
         // header_js
         else if(action == "header_js") {
             obj = obj.parentNode;
@@ -29,17 +32,19 @@ function onEvent(obj, sender, action) {
                 lImgNode.parentNode.innerHTML = lImg.outerHTML;
             }
         }
+        //===============================================
         // header_cancel
         else if(action == "header_cancel") {
             lApp.displayfiles_check_flag = 0;
             lApp.displayfiles_check_count = 0;
             onEvent(obj, "displayfiles", "header_js");
         }
+        //===============================================
         // header_select
         else if(action == "header_select") {
             var lHeaders = [
                 ["delete", "Supprimer", "displayfiles", "image_delete"],
-                ["download", "Télécharger", "displayfiles", "header_js"],
+                ["download", "Télécharger", "displayfiles", "image_download"],
                 ["cancel", "Annuler", "displayfiles", "header_cancel"],
             ];
             var lHtml = "";
@@ -50,7 +55,7 @@ function onEvent(obj, sender, action) {
                     if(lApp.displayfiles_check_count == 0) {continue;}
                 }
                 else if(lKey == "download") {
-                    if(lApp.displayfiles_check_count != 1) {continue;}
+                    if(lApp.displayfiles_check_count == 0) {continue;}
                 }
                 if(j != 0) {lHtml += " | ";}
                 j = 1;
@@ -70,6 +75,7 @@ function onEvent(obj, sender, action) {
                 }
             }
         }
+        //===============================================
         // image_load
         else if(action == "image_load") {
             var lHtml = "";
@@ -77,6 +83,7 @@ function onEvent(obj, sender, action) {
             obj.dataset.src, obj.dataset.alt);
             obj.innerHTML = lHtml;
         }
+        //===============================================
         // image_select
         else if(action == "image_select") {
             var lParent = obj.parentNode.parentNode.parentNode;
@@ -91,6 +98,7 @@ function onEvent(obj, sender, action) {
             obj = obj.parentNode.parentNode.parentNode.parentNode.previousElementSibling.firstChild.firstChild;
             onEvent(obj, "displayfiles", "header_select");
         }
+        //===============================================
         // image_delete
         else if(action == "image_delete") {
             var lConfirm = confirm("Voulez-vous supprimer ?");
@@ -108,8 +116,29 @@ function onEvent(obj, sender, action) {
                     GManager.Instance().removeImage(lSrc);
                 }
             }
+            onEvent(obj, "displayfiles", "header_cancel");
         }
+        //===============================================
+        // image_download
+        else if(action == "image_download") {
+            var lConfirm = confirm("Voulez-vous télécharger ?");
+            if(!lConfirm) {return;}
+            var lParent = obj.parentNode.parentNode.nextElementSibling;
+            var lInputMap = lParent.querySelectorAll("input");
+            for(var i = 0; i < lInputMap.length; i++) {
+                var lInputNode = lInputMap[i];
+                var lChecked = lInputNode.checked;
+                if(lChecked) {
+                    var lImg = lInputNode.parentNode.previousElementSibling;
+                    var lSrc = lImg.getAttribute("src");
+                    GManager.Instance().downloadImage(lSrc);
+                }
+            }
+            onEvent(obj, "displayfiles", "header_cancel");
+        }
+        //===============================================
     }
+    //===============================================
 }
 //===============================================
 function onLazyLoad() {

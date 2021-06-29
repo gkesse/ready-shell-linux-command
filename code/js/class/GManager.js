@@ -41,6 +41,22 @@ var GManager = (function() {
                 "req=" + "image_remove" +
                 "&path=" + path
                 );
+            },
+            //===============================================
+            getFilename: function(path) {
+                var lFilename = path.replace(/^.*[\\\/]/, '');
+                return lFilename;
+            },
+            //===============================================
+            downloadImage: function(path) {
+                var lLink = document.createElement('a');
+                var lFilename = this.getFilename(path);
+                lLink.setAttribute('download', lFilename);
+                lLink.style.display = 'none';
+                document.body.appendChild(lLink);
+                lLink.setAttribute('href', path);
+                lLink.click();
+                document.body.removeChild(lLink);
             }
             //===============================================
         };
