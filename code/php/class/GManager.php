@@ -9,7 +9,7 @@ class GManager {
         // app
         $this->mgr->app = new sGApp();
         $this->mgr->app->app_name = "ReadyApp";
-        $this->mgr->app->debug_file = "debug.txt";
+        $this->mgr->app->debug_file = "debug/debug.txt";
         $this->mgr->app->tmp_dir = "tmp";
         $this->mgr->app->tmp_upload_file = "tmp/tmp_upload_file.tmp";
         $this->mgr->app->upload_dir = "uploads";
@@ -95,7 +95,7 @@ class GManager {
     //===============================================
     public function write($data) {
         $lApp = $this->mgr->app;
-        $lFile = fopen($lApp->debug_file, "a+");
+        $lFile = fopen($_SERVER["DOCUMENT_ROOT"]."/".$lApp->debug_file, "a+");
         fwrite($lFile, $data . "\n");
         fclose($lFile);
     }

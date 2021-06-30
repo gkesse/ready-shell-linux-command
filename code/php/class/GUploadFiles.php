@@ -47,12 +47,14 @@ class GUploadFiles extends GWidget {
         echo sprintf("<h1>Système d'hébergement de fichiers (multiple)</h1>\n");
 
         echo sprintf("<div><div class='border'>\n");
-        echo sprintf("<form action='' method='post' enctype='multipart/form-data'>\n");
+        echo sprintf("<form action='' method='post' enctype='multipart/form-data' onsubmit='return onSubmit(this, \"uploadfiles\", \"image_submit\")'>\n");
         echo sprintf("<input type='hidden' name='upload_type' value='multiple'>\n"); 
-        echo sprintf("<input type='file' name='upload_files[]' required multiple>\n");
+        echo sprintf("<input type='file' name='upload_files[]' required multiple onchange='onEvent(this, \"uploadfiles\", \"image_load\")'>\n");
         echo sprintf("<input type='submit' value='Charger' name='upload'>\n");
         echo sprintf("</form>\n");
         echo sprintf("</div></div>\n");
+        echo sprintf("<div></div>\n");
+        echo sprintf("<div></div>\n");
 
         if($lUploadFlag) {
             echo sprintf("<div><div class='border'>\n");
