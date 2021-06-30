@@ -1,4 +1,11 @@
 //===============================================
+// onSubmit
+//===============================================
+function onSubmit(obj, sender, action) {
+    onEvent(obj, sender, action);
+    return false;
+}
+//===============================================
 // onEvent
 //===============================================
 function onEvent(obj, sender, action) {
@@ -152,7 +159,7 @@ function onEvent(obj, sender, action) {
         // image_load
         if(action == "image_load") {
             var lParent = obj.parentNode.parentNode.parentNode.nextElementSibling;
-            var lHtml = "";
+            lParent.innerHTML = "";
             for(var i = 0; i < obj.files.length; i++) {
                 (function() {
                     var lReader = new FileReader();
@@ -160,6 +167,41 @@ function onEvent(obj, sender, action) {
                         lParent.innerHTML += format("<div class='border3'><img class='img' src='{0}'/></div>", event.target.result);
                     }
                     lReader.readAsDataURL(obj.files[i]);
+                })();
+            }
+        }
+        //===============================================
+        // image_submit
+        else if(action == "image_submit") {
+            var lFileNode = obj.firstChild.nextElementSibling.nextElementSibling;
+            var lInfoNode = obj.parentNode.parentNode.nextElementSibling.nextElementSibling;
+            lInfoNode.innerHTML = "";
+            for(var i = 0; i < lFileNode.files.length; i++) {
+                (function() {
+                    var lFile = lFileNode.files[i];
+                    var chunk_uploader = new MyChunkUploader();
+
+                    chunk_uploader.on_ready = function(response) {
+                    };
+
+                    chunk_uploader.on_done = function() {
+                        lInfoNode.innerHTML += format("<div>on_done...</div>");
+                        lInfoNode.innerHTML += format("<div>file_name : {0}</div>", lFile.name);
+                        lInfoNode.innerHTML += format("<div>file_size : {0} KB</div>", (lFile.size/(1024)).toFixed(2));
+                    };
+                    
+                    chunk_uploader.on_error = function(object, err_type) {
+                        lInfoNode.innerHTML += format("<div>on_error...</div>");
+                    };
+
+                    chunk_uploader.on_abort = function(object) {
+                        lInfoNode.innerHTML += format("<div>on_abort...</div>");
+                    };
+
+                    chunk_uploader.on_upload_progress = function(progress) {
+                    };
+
+                    chunk_uploader.upload_chunked('/uploads/upload.php',lFile);
                 })();
             }
         }

@@ -21,7 +21,7 @@ echo sprintf("<body>\n");
 GWidget::Create("header")->run();
 GWidget::Create("workspace")->run();
 
-echo sprintf("<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>\n");
+echo sprintf("<script src='/libs/my_chunk_uploader/chunk-uploader.js'></script>\n");
 echo sprintf("<script src='/js/manager.js'></script>\n");
 echo sprintf("<script src='/js/class/GManager.js'></script>\n");
 echo sprintf("<script src='/js/script.js'></script>\n");
