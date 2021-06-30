@@ -2,6 +2,8 @@
 # cmd
 cmd_chmod:
 	@sudo chmod -R 777 $(GPROJECT_PATH) 
+cmd_run:
+	@cd $(GPROJECT_PATH) && $(argv)
 #================================================
 # apache
 apa_status:
