@@ -1,2 +1,3 @@
-# ReadyApp
-Bibliothèque d'applications web développées en PHP
+# Introduction
+
+Développement d'une bibliothèque de scripts shell pour l'exécution de commande Linux à partir d'un terminal.
